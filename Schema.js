@@ -18,6 +18,7 @@ exports.typeDefs = gql`
     description: String!
     onSales: Boolean
     image: String
+    reviews:[Review]!
     categoryForProduct:Category
   }
 
@@ -25,5 +26,12 @@ exports.typeDefs = gql`
     id: ID!
     name: String!
     productsForCategory: [Product!]!
+  }
+  type Review{
+    id:ID!
+    date:String!
+    title:String!
+    comment:String!
+    rating:Int!
   }
 `;

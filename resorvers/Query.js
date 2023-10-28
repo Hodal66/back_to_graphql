@@ -1,16 +1,14 @@
-const {products,categoriesDb} = require("../db")
 
 exports.Query= {
     hello: () => {
       console.log("Hello this is your graphiql hello world!!");
       return "Ndagukunda graphql uzankorera umuti!!";
     },
-    products: () => {
+    products: (parent,args,{products}) => {
       return products;
     },
-    productDetail: (parent, args, context) => {
-      console.log("My Id is :", args);
-      const myProductId = args.id;
+    productDetail: (parent, {id:myProductId}, {products}) => {
+  
       const newProduct = products.find((prev) => prev.id === myProductId);
       if (newProduct) {
         return newProduct;
@@ -19,13 +17,11 @@ exports.Query= {
       }
     },
     //This is query for all categories
-    categories: (parent, args, context) => {
+    categories: (parent, args, {categoriesDb}) => {
       return categoriesDb;
     },
-    categoriesDetail: (parent, args, context) => {
-      const { id } = args;
+    categoriesDetail: (parent, {id}, {categoriesDb}) => {
       const choosenCategory = categoriesDb.find((prev) => prev.id === id);
-      console.log("My categorie is : ", choosenCategory);
       if (!choosenCategory) return null;
       return choosenCategory;
     },
