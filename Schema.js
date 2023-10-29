@@ -5,7 +5,7 @@ exports.typeDefs = gql`
   type Query {
     hello: String
     allThingsWeLike: [String!]!
-    products: [Product!]!
+    products(filter:filterProductsInput): [Product!]!
     productDetail(id: ID!): Product
     categories: [Category!]!
     categoriesDetail(id: ID!): Category
@@ -16,7 +16,7 @@ exports.typeDefs = gql`
     name: String!
     price: Float!
     description: String!
-    onSales: Boolean
+    onSale: Boolean!
     image: String
     reviews:[Review]!
     categoryForProduct:Category
@@ -25,7 +25,7 @@ exports.typeDefs = gql`
   type Category {
     id: ID!
     name: String!
-    productsForCategory: [Product!]!
+    productsForCategory(filter:filterProductsInput): [Product!]!
   }
   type Review{
     id:ID!
@@ -33,5 +33,8 @@ exports.typeDefs = gql`
     title:String!
     comment:String!
     rating:Int!
+  }
+  input filterProductsInput{
+    onSale:Boolean
   }
 `;

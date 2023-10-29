@@ -4,8 +4,18 @@ exports.Query= {
       console.log("Hello this is your graphiql hello world!!");
       return "Ndagukunda graphql uzankorera umuti!!";
     },
-    products: (parent,args,{products}) => {
-      return products;
+    products: (parent,{filter},{products}) => {
+      let filteredProducts = products;
+      console.log("Hello Am Getting Products")
+      if(filter){
+        if(filter.onSale === true){
+          console.log("we are in Filtering Mode!!")
+           filteredProducts= filteredProducts.filter(prev=>{
+            return prev.onSale
+           })
+        }
+      }
+      return filteredProducts;
     },
     productDetail: (parent, {id:myProductId}, {products}) => {
   
