@@ -1,11 +1,11 @@
 
   exports.Product={
-    categoryForProduct:({categoriesId:categoryForProductParentId},args,{categoriesDb})=>{
+    categoryForProduct:({categoriesId:categoryForProductParentId},args,{db})=>{
 
-      return categoriesDb.find(category=>category.id === categoryForProductParentId);
+      return db.categoriesDb.find(category=>category.id === categoryForProductParentId);
     },
-    reviews:({id},args,{reviews})=>{
-      return reviews.filter(prev=>prev.productId === id);
+    reviews:({id},args,{db})=>{
+      return db.reviews.filter(prev=>prev.productId === id);
 
     }
   }

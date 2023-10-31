@@ -1,7 +1,8 @@
 const { ApolloServer} = require("apollo-server");
-const {products,categoriesDb,reviews} = require("./db")
+const {db} = require("./database")
 const {Category} = require("./resorvers/Category")
 const {Product} = require("./resorvers/Product")
+const {Mutation} = require("./resorvers/Mutation")
 const {Query} = require("./resorvers/Query")
 const {typeDefs} =require("./Schema")
 const port = 4000;
@@ -11,14 +12,13 @@ const server = new ApolloServer({
   resolvers:{
     Query,
     Product,
-    Category
+    Category,
+    Mutation,
   },
   context:{
-    products,
-    categoriesDb,
-    reviews
+ db
   }
 });
 server.listen(port).then(({ url }) => {
-  console.log("Server is running At : ", url);
+  console.log("Server is running At :... ", url);
 });
